@@ -111,14 +111,7 @@ describe('Roman to Arabic', () => {
     const translation = new Translate(3769329);
     expect(translation.translateArabic()).toEqual("M̅M̅M̅D̅C̅C̅L̅X̅MX̅CCCXXIX");
   });
-  test('should correctly return 1 for input I', () => {
-    const translation = new Translate("I");
-    expect(translation.translateRoman()).toEqual(1);
-  });
-  test('should correctly return 2 for input II', () => {
-    const translation = new Translate("II");
-    expect(translation.translateRoman()).toEqual(2);
-  });
+
 })
 
 describe('Arabic to Roman', () => {

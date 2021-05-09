@@ -17,31 +17,31 @@ Translate.prototype.checkInput = function() {
 };
 
 Translate.prototype.isItRoman = function(totalNumber) {
-  let romanArray = ["I","V","X","L","C","D","M","V̅","X̅","L̅","C̅","D̅","M̅" ];
+//  let romanArray = ["I","V","X","L","C","D","M","V̅","X̅","L̅","C̅","D̅","M̅" ];
   totalNumber = 0;
   let y = this.inputNumber.split("");
-  let count = 0
+  let count = 0;
   for(let i = 0; i<y.length; i++) {
-    count = 0
+    count = 0;
     for(let j = 1; j<4; j++) {
       if(y[i]===y[i+j]) {
-        count = count +1
+        count = count +1;
         if(count>2) {
-          totalNumber = "Too many characters in a row"
+          totalNumber = "Too many characters in a row";
         }
       }
     }
   }
-  return totalNumber
-}
+  return totalNumber;
+};
 
 Translate.prototype.translateRoman = function() {
   let totalNumber = 0;
   let romanArray = ["I","V","X","L","C","D","M","V̅","X̅","L̅","C̅","D̅","M̅" ];
-  let arabicArray = [1,5,10,50,100,500,1000,5000,10000,50000,100000,500000,1000000]
+  let arabicArray = [1,5,10,50,100,500,1000,5000,10000,50000,100000,500000,1000000];
   
-  let subTotal = []
-  let count = 0
+  let subTotal = [];
+  let count = 0;
   let y = this.inputNumber.split("");
   //this.isItRoman()
   if (totalNumber ===0) {
@@ -49,21 +49,21 @@ Translate.prototype.translateRoman = function() {
       count = 0;
       for(let j=0; j<romanArray.length; j++){
         if(y[i]===romanArray[j]) {
-          count = count+1
+          count = count+1;
           subTotal.push(arabicArray[j]);
         }
       }
       if (count ===0) {
-        totalNumber =  "Not a correct Roman Numeral"
+        totalNumber =  "Not a correct Roman Numeral";
       }
     }
-  };  
+  }  
   if(totalNumber===0){
     if(y.length>1){  
       for(let i = 0; i<subTotal.length-1; i++){
         if(subTotal[i]>subTotal[i+1]) {
-          subTotal[i+1]= subTotal[i] - subTotal[i+1]
-          subTotal[i]= 0
+          subTotal[i+1]= subTotal[i] - subTotal[i+1];
+          subTotal[i]= 0;
         }
         totalNumber = subTotal.reduce(function(a, b){
           return a + b;

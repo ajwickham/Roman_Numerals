@@ -1,13 +1,79 @@
 export default function Translate(inputNumber) {
   this.inputNumber = inputNumber;
 }
-  
+
+Translate.prototype.checkInput = function() {
+  let xxx = 0;
+  if(isNaN(this.inputNumber)) {
+    let yyy = this.isItRoman();
+    if(yyy===0){
+      xxx = this.translateRoman();
+    }  
+  }
+  else {
+    xxx = this.translateArabic();
+  }
+  return xxx;
+};
+
+Translate.prototype.isItRoman = function(totalNumber) {
+  let romanArray = ["I","V","X","L","C","D","M","V̅","X̅","L̅","C̅","D̅","M̅" ];
+  totalNumber = 0;
+  let y = this.inputNumber.split("");
+  let count = 0
+  for(let i = 0; i<y.length; i++) {
+    count = 0
+    for(let j = 1; j<4; j++) {
+      if(y[i]===y[i+j]) {
+        count = count +1
+        if(count>2) {
+          totalNumber = "Too many characters in a row"
+        }
+      }
+    }
+  }
+  return totalNumber
+}
+
 Translate.prototype.translateRoman = function() {
   let totalNumber = 0;
+  let romanArray = ["I","V","X","L","C","D","M","V̅","X̅","L̅","C̅","D̅","M̅" ];
+  let arabicArray = [1,5,10,50,100,500,1000,5000,10000,50000,100000,500000,1000000]
+  
+  let subTotal = []
+  let count = 0
   let y = this.inputNumber.split("");
-  for (let i=0; i<y.length; i++){
-    if(y[i]==="I") {totalNumber = totalNumber+1;}
-  }
+  //this.isItRoman()
+  if (totalNumber ===0) {
+    for (let i=y.length-1; i>-1; i--){
+      count = 0;
+      for(let j=0; j<romanArray.length; j++){
+        if(y[i]===romanArray[j]) {
+          count = count+1
+          subTotal.push(arabicArray[j]);
+        }
+      }
+      if (count ===0) {
+        totalNumber =  "Not a correct Roman Numeral"
+      }
+    }
+  };  
+  if(totalNumber===0){
+    if(y.length>1){  
+      for(let i = 0; i<subTotal.length-1; i++){
+        if(subTotal[i]>subTotal[i+1]) {
+          subTotal[i+1]= subTotal[i] - subTotal[i+1]
+          subTotal[i]= 0
+        }
+        totalNumber = subTotal.reduce(function(a, b){
+          return a + b;
+        }, 0);
+      }
+    }
+    else {
+      totalNumber = subTotal[0];
+    }
+  }  
   return totalNumber;
 };
 

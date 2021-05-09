@@ -1,6 +1,6 @@
 import Translate from './../src/data';
 
-describe('Roman to Arabic', () => {
+describe('Arabic to Roman', () => {
 
   test('should correctly create a translate object from inputNumber', () => {
     const translation = new Translate(2);
@@ -114,13 +114,71 @@ describe('Roman to Arabic', () => {
 
 })
 
-describe('Arabic to Roman', () => {
-    test('should correctly return 1 for input I', () => {
-        const translation = new Translate("I");
-        expect(translation.translateRoman()).toEqual(1);
-        });
-        test('should correctly return 2 for input II', () => {
-        const translation = new Translate("II");
-        expect(translation.translateRoman()).toEqual(2);
-        });
+describe('Roman to Arabic', () => {
+
+  test('should correctly return 2 for input II', () => {
+  const translation = new Translate("II");
+  expect(translation.translateRoman()).toEqual(2);
+  });
+  
+  test('should correctly return 1 for input I using translateRoman function', () => {
+    const translation = new Translate("I");
+    expect(translation.translateRoman()).toEqual(1);
+  });
+
+  test('should distinguish between numeric and alphanumeric input', () => {
+    const translation = new Translate("III");
+    expect(translation.checkInput()).toEqual(3);
+  });
+
+  test('should correctly return 5 for input V', () => {
+    const translation = new Translate("V");
+    expect(translation.checkInput()).toEqual(5);
+  });
+
+  test('should correctly return subtract 1 from 5 for input IV', () => {
+    const translation = new Translate("IV");
+    expect(translation.checkInput()).toEqual(4);
+  });
+
+  test('should correctly return subtract 1 from 10 for input IX', () => {
+    const translation = new Translate("IX");
+    expect(translation.checkInput()).toEqual(9);
+  });
+  
+  test('should correctly return subtract lower numbers from higher multiple times CXCIV = 194', () => {
+    const translation = new Translate("CXCIV");
+    expect(translation.checkInput()).toEqual(194);
+  });
+
+  test('should return "Not a correct Roman Numeral for inputs that dont have the correct letters', () => {
+    const translation = new Translate("ItV");
+    expect(translation.checkInput()).toEqual("Not a correct Roman Numeral");
+  });
+
+  test('should return "Too many characters in a row"', () => {
+    const translation = new Translate("IIII");
+    expect(translation.isItRoman()).toEqual("Too many characters in a row");
+  });
+  
+  test('should return "Too many characters in a row" for 5 characters', () => {
+    const translation = new Translate("IIIII");
+    expect(translation.isItRoman()).toEqual("Too many characters in a row");
+  });
+
+  test('should return "Too many characters in a row" for other characters', () => {
+    const translation = new Translate("XXXX");
+    expect(translation.isItRoman()).toEqual("Too many characters in a row");
+  });
+  
+  test('should return "Too many characters in a row" for a mix of correct and incorrect characters', () => {
+    const translation = new Translate("MMMMIIIIIV");
+    expect(translation.isItRoman()).toEqual("Too many characters in a row");
+  });
+
+  test('should return V for a check input based Arabic to Roman' , () => {
+    const translation = new Translate(5);
+    expect(translation.checkInput()).toEqual("V");
+  });
+  
 })

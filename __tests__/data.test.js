@@ -1,4 +1,5 @@
 import Translate from './../src/data';
+import Test from './../src/main';
 
 describe('Arabic to Roman', () => {
 
@@ -180,6 +181,12 @@ describe('Roman to Arabic', () => {
     const translation = new Translate(5);
     expect(translation.checkInput()).toEqual("V");
   });
-  
-  
+})
+
+describe('Input Page operation', () => {
+
+  test('should correctly create a translate object from inputNumber', () => {
+    const testing123 = new Test(2);
+    expect(testing123.inputNumber).toEqual(2);
+  })
 })

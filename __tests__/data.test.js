@@ -185,8 +185,14 @@ describe('Roman to Arabic', () => {
 
 describe('Input Page operation', () => {
 
-  test('should correctly create a translate object from inputNumber', () => {
+  test('should correctly create a test object from inputNumber', () => {
     const testing123 = new Test(2);
-    expect(testing123.inputNumber).toEqual(2);
+    expect(testing123.testNumber).toEqual(2);
   })
+  test('should correctly return V for a test check input 5', () => {
+    const testing123 = new Test(5);
+    expect(testing123.checkFunctionality()).toEqual("V");
+  })
+
+
 })

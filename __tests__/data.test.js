@@ -189,9 +189,21 @@ describe('Input Page operation', () => {
     const testing123 = new Test(2);
     expect(testing123.testNumber).toEqual(2);
   })
-  test('should correctly return V for a test check input 5', () => {
+  test('should correctly what I want return V for a test check input 5', () => {
     const testing123 = new Test(5);
     expect(testing123.checkFunctionality()).toEqual("V");
+  })
+
+  test('should correctly return subtract 1 from 5 for input IV', () => {
+    let translation = 0;
+    translation = new Translate("VV");
+    expect(translation.checkInput()).toEqual(7);
+  });
+
+  test('should correctly identify if two or more of these are submitted: "V","L","D","V̅","L̅","D̅"', () => {
+    const translation = new Translate("VV");
+    const translationChecked = (translation.translateRoman());
+    expect(translationChecked).toEqual("Too many V");
   })
 
 

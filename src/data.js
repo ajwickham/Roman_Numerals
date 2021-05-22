@@ -42,23 +42,31 @@ Translate.prototype.translateRoman = function() {
   
   let subTotal = [];
   let count = 0;
-  let y = this.inputNumber.split("");
+  let fiveCount =0
+  let y = 0;
+  y = this.inputNumber.split("");
   //this.isItRoman()
-  if (totalNumber ===0) {
+  if (totalNumber ===0) {  //character check.  If Roman adds arabic translation to subTotal
     for (let i=y.length-1; i>-1; i--){
       count = 0;
       for(let j=0; j<romanArray.length; j++){
         if(y[i]===romanArray[j]) {
           count = count+1;
           subTotal.push(arabicArray[j]);
+          if((y[i-1]===y[i]) && ((j+1)%2)===0) {  
+            //if character the same as the previous and it is V,L, D etc
+            totalNumber = i;//&"s in a row"
+            return totalNumber;
+          }
         }
       }
       if (count ===0) {
         totalNumber =  "Not a correct Roman Numeral";
+        return totalNumber;
       }
     }
   }  
-  if(totalNumber===0){
+  if(totalNumber===0){  //adds up subtotal array
     if(y.length>1){  
       for(let i = 0; i<subTotal.length-1; i++){
         if(subTotal[i]>subTotal[i+1]) {
